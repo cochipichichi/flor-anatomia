@@ -1,295 +1,117 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XR Lab · Anatomía de la flor</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <title>Anatomía de la Flor — Repositorio XR</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <meta name="theme-color" content="#020617" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <meta name="theme-color" content="#050816" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="js/controls.js"></script>
 </head>
-<body>
+<body class="dark-theme">
   
 <header class="top-bar">
-  <div class="brand">
-    <span class="brand-mark">🌸</span>
-    <div class="brand-text">
-      <div>XR Lab · Anatomía de la flor</div>
-      <small>Neotech EduLab · Inclusión & Ciencia</small>
-    </div>
+  <div class="logo-title">
+    <span class="logo">🌸</span>
+    <span class="title">Anatomía de la Flor — Repositorio XR</span>
   </div>
-  <nav class="main-nav" aria-label="Navegación principal">
-    <a href="index.html" class="nav-btn accent"><span>🏠</span><span>Inicio</span></a>
-    <a href="viewer3D/flor-3d.html" class="nav-btn"><span>👁️</span><span>Ver en 3D</span></a>
-    <a href="viewerAR/flor-ar.html" class="nav-btn"><span>📱</span><span>AR</span></a>
-    <a href="viewerVR/flor-vr.html" class="nav-btn"><span>🥽</span><span>VR</span></a>
-    <a href="dashboard.html" class="nav-btn"><span>📊</span><span>Dashboard</span></a>
-    <a href="docente.html" class="nav-btn"><span>🧑‍🏫</span><span>Docente</span></a>
-  </nav>
-  <div class="accessibility-controls" aria-label="Controles de accesibilidad">
-    <button class="ctrl-btn" type="button" data-action="home" title="Ir al inicio">🏠</button>
-    <button class="ctrl-btn" type="button" data-action="speak" title="Leer el contenido">🗣️</button>
-    <button class="ctrl-btn" type="button" data-action="toggle-theme" title="Cambiar tema claro/oscuro">🌓</button>
-    <button class="ctrl-btn" type="button" data-action="font-inc" title="Aumentar tamaño de letra">A+</button>
-    <button class="ctrl-btn" type="button" data-action="font-dec" title="Disminuir tamaño de letra">A−</button>
+  <div class="controls" aria-label="Controles de accesibilidad e idioma">
+    <button class="ctrl-btn" id="btn-home" title="Inicio">🏠</button>
+    <button class="ctrl-btn" id="btn-tts" title="Leer en voz alta">🗣️</button>
+    <button class="ctrl-btn" id="btn-theme" title="Cambiar tema claro/oscuro">🌓</button>
+    <button class="ctrl-btn" id="btn-font-inc" title="Aumentar tamaño de letra">A+</button>
+    <button class="ctrl-btn" id="btn-font-dec" title="Disminuir tamaño de letra">A−</button>
+    <button class="ctrl-btn" id="btn-lang" title="Cambiar idioma ES/EN">🌐</button>
+    <button class="ctrl-btn" id="btn-focus" title="Modo concentración / resaltar contenido clave">🧠</button>
+    <button class="ctrl-btn" id="btn-search" title="Buscar en la página">🔍</button>
   </div>
 </header>
 
-  <main id="main-content" class="layout layout-full">
-    <section class="hero card" data-searchable>
-      <div class="hero-text">
-        <h1>🌸 Anatomía de la flor en 3D, AR y VR</h1>
-        <p class="lead">
-          Explora una flor completa por dentro: sépalos, pétalos, estambres y carpelos en un flujo XR pensado
-          para estudiantes de Enseñanza Media, PIE y curiosos de la botánica.
-        </p>
-        <div class="cta-row">
-          <button type="button" class="cta-btn small secondary" data-action="easy-read">🧩 Modo lectura fácil</button>
-          <a href="viewer3D/flor-3d.html" class="cta-btn"><span>👁️</span><span>Ver modelo 3D</span></a>
-          <a href="viewerAR/flor-ar.html" class="cta-btn secondary"><span>📱</span><span>Modo AR</span></a>
-          <a href="viewerVR/flor-vr.html" class="cta-btn secondary"><span>🥽</span><span>Modo VR</span></a>
-        </div>
+  <main class="layout">
+    <section class="hero card">
+      <h1>🌸 Anatomía de la Flor</h1>
+      <p>
+        Este repositorio está pensado para que estudiantes de 7° básico a 2° medio exploren
+        la anatomía de la flor usando diagramas, modelos 3D, realidad aumentada (AR) y
+        realidad virtual (VR). Incluye apoyos para estudiantes del PIE y recursos para docentes.
+      </p>
+      <div class="hero-buttons">
+        <a class="primary-btn" href="#diagrama">📊 Ver diagrama interactivo</a>
+        <a class="secondary-btn" href="viewer3D/index.html">👁️ Ver modelo 3D</a>
+        <a class="secondary-btn" href="viewerAR/index.html">📱 AR</a>
+        <a class="secondary-btn" href="viewerVR/index.html">🥽 VR</a>
       </div>
-      <figure class="hero-image">
-        <img src="assets/img/flor_hero.png" alt="Ilustración estilizada de una flor completa" loading="lazy" />
+    </section>
+
+    <section id="diagrama" class="card">
+      <h2>📊 Diagrama de la flor</h2>
+      <p>
+        Observa el siguiente diagrama y relaciona cada estructura con su función principal.
+      </p>
+      <figure class="diagram-figure">
+        <div class="sketchfab-embed-wrapper"> <iframe title="Anatomy of a Flower" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4ce0afd091d742e286a0de156e183d95/embed?dnt=1"> </iframe> </div>
         <figcaption>
-          Representación artística de una flor completa. El modelo 3D adjunto permite observar con detalle la posición
-          de cada órgano reproductor.
-        </figcaption>
+          <h3>La morfología de una flor, es decir, su <strong>forma y estructura</strong>, se divide en dos partes: la parte vegetativa, que comprende las estructuras no reproductivas como los pétalos; y las partes reproductivas o sexuales. Una flor típica se compone de cuatro tipos de estructuras unidas al extremo de un tallo corto o eje, llamado receptáculo. Cada una de estas partes u órganos florales se dispone en espiral, formando un verticilo. Los cuatro verticilos principales (desde la base de la flor o nudo más bajo hacia arriba) son el cáliz, la corola, el androceo y el gineceo. El cáliz y la corola, en conjunto, forman la parte no reproductiva de la flor, denominada perianto, y en algunos casos no se diferencian. En tal caso, se denominan tépalos.
+        </h3></figcaption>
       </figure>
-    </section>
-
-    <section class="card" data-searchable>
-      <h2>🌱 ¿Qué es una flor?</h2>
-      <p class="normal-only">
-        La flor es el órgano reproductor característico de las plantas angiospermas. En una flor típica distinguimos
-        cuatro verticilos o "anillos" dispuestos de afuera hacia adentro:
-      </p>
-      <p class="easy-read-only">
-        La flor es la parte de la planta donde se forman las semillas. Tiene capas como un “sándwich”: primero los sépalos,
-        luego los pétalos y al centro las partes que producen polen y óvulos.
-      </p>
-      <ul class="spec-list">
-        <li><strong>Cáliz (sépalos):</strong> piezas generalmente verdes que protegen al botón floral.</li>
-        <li><strong>Corola (pétalos):</strong> piezas de colores llamativos que ayudan a atraer polinizadores.</li>
-        <li><strong>Androceo (estambres):</strong> conjunto de órganos reproductores masculinos que producen polen.</li>
-        <li><strong>Gineceo (carpelos o pistilo):</strong> órgano reproductor femenino que contiene los óvulos.</li>
-      </ul>
-      <p>
-        Cuando una flor posee los cuatro verticilos se dice que es una <strong>flor completa</strong>. En cambio, si
-        falta alguno de ellos se considera una <strong>flor incompleta</strong>. Además, si presenta estambres y carpelos
-        en la misma flor es <strong>perfecta o hermafrodita</strong>; si sólo posee estructuras masculinas o femeninas,
-        se denomina <strong>imperfecta o unisexual</strong>.
-      </p>
-    </section>
-
-    <section class="card grid two-cols" data-searchable>
-      <article>
-        <h2>🔍 Partes principales en el modelo 3D</h2>
-        <ul class="spec-list">
-          <li><strong>Pedúnculo y receptáculo:</strong> sostienen la flor y sirven de base para los demás órganos.</li>
-          <li><strong>Sépalos:</strong> rodean la base de la flor, protegiendo el botón floral.</li>
-          <li><strong>Pétalos:</strong> pueden formar patrones de color que guían a los polinizadores hacia el néctar.</li>
-          <li><strong>Estambre:</strong> formado por <em>filamento</em> (soporte) y <em>antera</em> (saco donde se forma el polen).</li>
-          <li><strong>Pistilo o carpelo:</strong> incluye <em>estigma</em> (recibe el polen), <em>estilo</em> (conduce el tubo polínico)
-            y <em>ovario</em> (contiene los óvulos).</li>
-          <li><strong>Nectarios:</strong> estructuras productoras de néctar que refuerzan la relación con polinizadores.</li>
-        </ul>
-      </article>
-      <article class="kpsi">
-        <h2>🧠 KPSI · ¿Qué sé sobre la flor?</h2>
-        <p>Antes y después de la experiencia XR, el estudiantado puede autoevaluar su nivel de manejo:</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Enunciado</th>
-              <th>No sé</th>
-              <th>Lo he escuchado</th>
-              <th>Lo entiendo</th>
-              <th>Lo podría explicar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Identifico en un dibujo sépalos, pétalos, estambres y pistilo.</td>
-              <td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td>
-            </tr>
-            <tr>
-              <td>Distingo estructuras masculinas y femeninas en una flor.</td>
-              <td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td>
-            </tr>
-            <tr>
-              <td>Relaciono cada parte de la flor con su función en la reproducción.</td>
-              <td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td>
-            </tr>
-            <tr>
-              <td>Explico por qué algunas flores son completas y otras incompletas.</td>
-              <td>⬜</td><td>⬜</td><td>⬜</td><td>⬜</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="note">
-          Puedes adaptar la KPSI para estudiantes PIE usando pictogramas, colores o escala de caritas.
-        </p>
-      </article>
-    </section>
-
-    <section class="card" data-searchable>
-      <h2>📚 Glosario básico de anatomía floral</h2>
-      <ul class="spec-list">
-        <li><strong>Óvulo:</strong> estructura que, tras la fecundación, dará origen a la semilla.</li>
-        <li><strong>Fruto:</strong> órgano que se forma a partir del ovario fecundado y protege a las semillas.</li>
-        <li><strong>Polinización:</strong> traslado del polen desde la antera hasta el estigma.</li>
-        <li><strong>Fecundación:</strong> unión del gameto masculino con el femenino dentro del óvulo.</li>
-        <li><strong>Inflorescencia:</strong> agrupación de varias flores sobre un mismo eje o rama.</li>
-      </ul>
-    </section>
-
-    <section class="card" data-searchable>
-      <h2>✅ Flujo de trabajo sugerido</h2>
-      <ol class="edu-list">
-        <li>Aplicar la KPSI y revisar brevemente las partes de la flor con imágenes 2D.</li>
-        <li>Explorar el modelo 3D en computador (rotar, hacer zoom, ocultar partes según la guía).</li>
-        <li>Pasar a AR/VR para estudiantes que necesiten apoyo visual espacial o motivacional extra.</li>
-        <li>Completar una guía donde asocian cada parte con su función y colorean un esquema.</li>
-        <li>Responder el quiz y ticket de salida para evidenciar comprensión.</li>
-      </ol>
-      <div class="workflow">
-        <span class="chip">👁️ Vista 3D</span>
-        <span class="chip">📱 AR en el aula</span>
-        <span class="chip">🥽 VR guiada</span>
-        <span class="chip">✅ KPSI inicio / fin</span>
-        <span class="chip">🧪 Quiz</span>
-        <span class="chip">🎟️ Ticket de salida</span>
+      <div class="diagram-grid">
+        <article class="chip">
+          <h3>🌺 Pétalos</h3>
+          <p>Atraen a los polinizadores mediante colores y aromas.</p>
+        </article>
+        <article class="chip">
+          <h3>🌱 Sépalos</h3>
+          <p>Protegen al botón floral antes de que se abra.</p>
+        </article>
+        <article class="chip">
+          <h3>🌾 Estambres</h3>
+          <p>Órganos reproductores masculinos; producen polen.</p>
+        </article>
+        <article class="chip">
+          <h3>🧬 Pistilo (carpelo)</h3>
+          <p>Órgano reproductor femenino; incluye estigma, estilo y ovario.</p>
+        </article>
+        <article class="chip">
+          <h3>🧫 Óvulos</h3>
+          <p>Células reproductoras femeninas que darán origen a semillas.</p>
+        </article>
+        <article class="chip">
+          <h3>🌰 Ovario</h3>
+          <p>Estructura que contiene los óvulos; después de la fecundación forma el fruto.</p>
+        </article>
       </div>
-    </section>
-
-    
-    <section class="card" id="quiz" data-searchable>
-      <h2>🧪 Quiz rápido (autocorregible)</h2>
-      <form id="quizForm">
-        <fieldset>
-          <legend>1. Una flor completa se caracteriza por...</legend>
-          <label><input type="radio" name="q1" value="a"> Tener solo estambres y pistilo.</label><br>
-          <label><input type="radio" name="q1" value="b" data-correct="true"> Tener cáliz, corola, estambres y pistilo.</label><br>
-          <label><input type="radio" name="q1" value="c"> No tener pétalos ni sépalos.</label>
-        </fieldset>
-        <fieldset>
-          <legend>2. ¿Qué función principal cumplen los pétalos?</legend>
-          <label><input type="radio" name="q2" value="a"> Sujetar la flor al tallo.</label><br>
-          <label><input type="radio" name="q2" value="b"> Producir óvulos.</label><br>
-          <label><input type="radio" name="q2" value="c" data-correct="true"> Atraer polinizadores con su color y forma.</label>
-        </fieldset>
-        <fieldset>
-          <legend>3. Marca la afirmación correcta:</legend>
-          <label><input type="radio" name="q3" value="a"> El pistilo es parte masculina de la flor.</label><br>
-          <label><input type="radio" name="q3" value="b" data-correct="true"> El pistilo contiene el ovario con los óvulos.</label><br>
-          <label><input type="radio" name="q3" value="c"> Los sépalos producen polen.</label>
-        </fieldset>
-        <button type="submit" class="cta-btn small">✅ Corregir</button>
-      </form>
-      <p id="quizResultado" class="note"></p>
-    </section>
-
-
-    <section class="card" id="ticket-salida" data-searchable>
-      <h2>🎟️ Ticket de salida</h2>
-      <ul>
-        <li>Escribe el nombre de una parte de la flor que antes no conocías y cuál es su función.</li>
-        <li>Completa: "La flor es importante para la planta porque..."</li>
-        <li>Dibuja una flecha que marque el recorrido del polen desde la antera hasta el óvulo.</li>
-      </ul>
-    </section>
-
-    <section class="card" id="csv" data-searchable>
-      <h2>📊 Plantilla de datos de la flor</h2>
-      <p>
-        El archivo <code>anatomia_flor_partes.csv</code> resume la cantidad de sépalos, pétalos, estambres y carpelos
-        de una flor modelo. Puedes modificar los valores, agregar otras especies y usar el <strong>Dashboard</strong>
-        para comparar estructuras.
-      </p>
-      <a href="assets/data/anatomia_flor_partes.csv" download class="cta-btn small">✅ Descargar CSV de ejemplo</a>
     </section>
 
     <section class="card">
-      <h2>🧭 Otras vistas y herramientas</h2>
+      <h2>🎯 Objetivos de aprendizaje</h2>
+      <ul class="pill-list">
+        <li>Reconocer partes de la flor y sus funciones.</li>
+        <li>Relacionar la estructura de la flor con la reproducción de las plantas.</li>
+        <li>Usar modelos 3D y AR como apoyo para la comprensión.</li>
+        <li>Registrar observaciones en una ficha o CSV para análisis posterior.</li>
+      </ul>
+    </section>
+
     <section class="card">
-      <h2>📥 Material descargable</h2>
-      <p>Usa estas plantillas para trabajar sin conexión o imprimirlas:</p>
-      <div class="cta-row">
-        <a href="docs/guia_estudiante_flor.pdf" class="cta-btn small">📄 Guía de estudiante (PDF)</a>
-        <a href="docs/guia_docente_flor.pdf" class="cta-btn small secondary">📘 Guía docente (PDF)</a>
+      <h2>🧪 Recursos interactivos</h2>
+      <div class="hero-buttons">
+        <a class="secondary-btn" href="docs/ficha_observacion.csv">✅ Registro CSV</a>
+        <a class="secondary-btn" href="quiz/quiz.html">🧪 Quiz</a>
+        <a class="secondary-btn" href="ticket/ticket.html">🎟️ Ticket de salida</a>
       </div>
-    </section>
-
-      <p>Accesos directos a las secciones complementarias del laboratorio XR:</p>
-      <div class="cta-row">
-          <button type="button" class="cta-btn small secondary" data-action="easy-read">🧩 Modo lectura fácil</button>
-        <a href="dashboard.html" class="cta-btn small">📊 Dashboard interactivo</a>
-        <a href="comparador.html" class="cta-btn small">⚖️ Flor completa vs incompleta</a>
-        <a href="docente.html" class="cta-btn small">🧑‍🏫 Vista docente</a>
-      </div>
-    </section>
-
-    <section class="card search-block">
-      <h2>🔍 Buscador dentro del recurso</h2>
-      <p>Escribe un término (por ejemplo "estambre", "fruto" o "polinización") para resaltar secciones relacionadas.</p>
-      <input type="search" placeholder="Buscar en el contenido..." aria-label="Buscar en el contenido" data-role="search-input" />
-      <p class="search-status" data-role="search-status">
-        Escribe un término para resaltar secciones relacionadas.
+      <p class="note">
+        Tip: Puedes subir el CSV a Google Sheets para graficar resultados y monitorear el progreso
+        de tus estudiantes (incluyendo PIE).
       </p>
     </section>
   </main>
-  
-<footer class="site-footer">
-  <p>
-    Neotech EduLab SpA · XR para la educación científica · Proyecto: <strong>"Ver la flor por dentro"</strong>.<br>
-    Desarrollado junto a estudiantes y PIE para explorar la anatomía floral en 3D, AR y VR.
-  </p>
-  <p>
-    Contacto: <a href="mailto:neotechedulab@gmail.com">neotechedulab@gmail.com</a> ·
-    Instagram: @neotech_edulab
-  </p>
-</footer>
 
-  <script src="js/main.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js').catch(console.error);
-    }
-  </script>
-
-  <script>
-    (function() {
-      const form = document.getElementById('quizForm');
-      const salida = document.getElementById('quizResultado');
-      if (!form) return;
-      form.addEventListener('submit', function(ev) {
-        ev.preventDefault();
-        let total = 0, correctas = 0;
-        const preguntas = ['q1', 'q2', 'q3'];
-        preguntas.forEach(name => {
-          total++;
-          const marcadas = Array.from(form.querySelectorAll('input[name="' + name + '"]:checked'));
-          if (marcadas.length && marcadas[0].hasAttribute('data-correct')) {
-            correctas++;
-          }
-        });
-        const pct = Math.round((correctas / total) * 100);
-        let mensaje = `Puntaje: ${correctas}/${total} (${pct}%). `;
-        if (pct === 100) {
-          mensaje += '¡Excelente! Puedes explicar muy bien la anatomía básica de la flor.';
-        } else if (pct >= 60) {
-          mensaje += 'Vas bien. Revisa las partes donde te equivocaste y vuelve a mirar el modelo 3D.';
-        } else {
-          mensaje += 'Conviene repasar el esquema de la flor y usar el modelo 3D/AR para reforzar.';
-        }
-        salida.textContent = mensaje;
-      });
-    })();
-  </script>
+  <footer class="site-footer">
+    <p>
+      Desarrollado junto a Neotech EduLab — Educación Inmersiva &amp; I+D. 
+      Reemplaza estos datos con los de tu establecimiento si lo necesitas.
+    </p>
+  </footer>
 </body>
 </html>
-
