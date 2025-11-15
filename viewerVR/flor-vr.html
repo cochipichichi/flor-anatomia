@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modo VR · Flor XR Lab</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <meta name="theme-color" content="#020617" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png" />
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+<body>
+  
+<header class="top-bar">
+  <div class="brand">
+    <span class="brand-mark">🌸</span>
+    <div class="brand-text">
+      <div>XR Lab · Anatomía de la flor</div>
+      <small>Neotech EduLab · Inclusión & Ciencia</small>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <a href="../index.html" class="nav-btn accent"><span>🏠</span><span>Inicio</span></a>
+    <a href="../viewer3D/flor-3d.html" class="nav-btn"><span>👁️</span><span>Ver en 3D</span></a>
+    <a href="../viewerAR/flor-ar.html" class="nav-btn"><span>📱</span><span>AR</span></a>
+    <a href="../viewerVR/flor-vr.html" class="nav-btn"><span>🥽</span><span>VR</span></a>
+    <a href="../dashboard.html" class="nav-btn"><span>📊</span><span>Dashboard</span></a>
+    <a href="../docente.html" class="nav-btn"><span>🧑‍🏫</span><span>Docente</span></a>
+  </nav>
+  <div class="accessibility-controls" aria-label="Controles de accesibilidad">
+    <button class="ctrl-btn" type="button" data-action="home" title="Ir al inicio">🏠</button>
+    <button class="ctrl-btn" type="button" data-action="speak" title="Leer el contenido">🗣️</button>
+    <button class="ctrl-btn" type="button" data-action="toggle-theme" title="Cambiar tema claro/oscuro">🌓</button>
+    <button class="ctrl-btn" type="button" data-action="font-inc" title="Aumentar tamaño de letra">A+</button>
+    <button class="ctrl-btn" type="button" data-action="font-dec" title="Disminuir tamaño de letra">A−</button>
+  </div>
+</header>
+
+  <main id="main-content" class="layout">
+    <section class="card">
+      <h1>🥽 Recorrido VR alrededor de la flor</h1>
+      <p>
+        Usa gafas compatibles con WebXR o el modo pantalla dividida de tu visor para caminar alrededor de la flor,
+        observando la posición relativa de cada estructura.
+      </p>
+      <div class="vr-wrapper">
+        <a-scene background="color: #020617">
+          <a-entity gltf-model="../assets/models/anatomia_flor.glb" position="0 0 -2.2" rotation="0 45 0" scale="0.8 0.8 0.8"></a-entity>
+          <a-entity light="type: directional; intensity: 1.0" position="1 2 1"></a-entity>
+          <a-entity light="type: ambient; intensity: 0.4"></a-entity>
+          <a-sky color="#020617"></a-sky>
+          <a-entity position="0 1.6 0">
+            <a-camera wasd-controls-enabled="true"></a-camera>
+          </a-entity>
+        </a-scene>
+      </div>
+      <p class="note">
+        Puedes pedir a los estudiantes que describan en voz alta lo que ven mientras se mueven, reforzando vocabulario
+        anatómico y orientación espacial.
+      </p>
+    </section>
+  </main>
+  
+<footer class="site-footer">
+  <p>
+    Neotech EduLab SpA · XR para la educación científica · Proyecto: <strong>"Ver la flor por dentro"</strong>.<br>
+    Desarrollado junto a estudiantes y PIE para explorar la anatomía floral en 3D, AR y VR.
+  </p>
+  <p>
+    Contacto: <a href="mailto:neotechedulab@gmail.com">neotechedulab@gmail.com</a> ·
+    Instagram: @neotech_edulab
+  </p>
+</footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

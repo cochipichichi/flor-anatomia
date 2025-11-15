@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista docente · Flor XR Lab</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#020617" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+</head>
+<body>
+  
+<header class="top-bar">
+  <div class="brand">
+    <span class="brand-mark">🌸</span>
+    <div class="brand-text">
+      <div>XR Lab · Anatomía de la flor</div>
+      <small>Neotech EduLab · Inclusión & Ciencia</small>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <a href="index.html" class="nav-btn accent"><span>🏠</span><span>Inicio</span></a>
+    <a href="viewer3D/flor-3d.html" class="nav-btn"><span>👁️</span><span>Ver en 3D</span></a>
+    <a href="viewerAR/flor-ar.html" class="nav-btn"><span>📱</span><span>AR</span></a>
+    <a href="viewerVR/flor-vr.html" class="nav-btn"><span>🥽</span><span>VR</span></a>
+    <a href="dashboard.html" class="nav-btn"><span>📊</span><span>Dashboard</span></a>
+    <a href="docente.html" class="nav-btn"><span>🧑‍🏫</span><span>Docente</span></a>
+  </nav>
+  <div class="accessibility-controls" aria-label="Controles de accesibilidad">
+    <button class="ctrl-btn" type="button" data-action="home" title="Ir al inicio">🏠</button>
+    <button class="ctrl-btn" type="button" data-action="speak" title="Leer el contenido">🗣️</button>
+    <button class="ctrl-btn" type="button" data-action="toggle-theme" title="Cambiar tema claro/oscuro">🌓</button>
+    <button class="ctrl-btn" type="button" data-action="font-inc" title="Aumentar tamaño de letra">A+</button>
+    <button class="ctrl-btn" type="button" data-action="font-dec" title="Disminuir tamaño de letra">A−</button>
+  </div>
+</header>
+
+  <main id="main-content" class="layout">
+    <section class="card">
+      <h1>🧑‍🏫 Vista docente · Anatomía de la flor</h1>
+      <p>
+        Esta sección está pensada para planificación, evaluación y adaptación curricular. Usa la contraseña demo
+        <strong>neotech</strong> para desplegar las orientaciones (puedes cambiarla al llevar esto a producción).
+      </p>
+      <form id="docenteForm">
+        <label>Contraseña:<br><input type="password" name="clave" required></label>
+        <button type="submit" class="cta-btn small">🔓 Acceder</button>
+      </form>
+      <p id="docenteMsg" class="note"></p>
+    </section>
+
+    <section id="docentePanel" class="card hidden">
+      <h2>🧩 Secuencia sugerida (3 sesiones)</h2>
+      <ol class="edu-list">
+        <li><strong>Sesión 1:</strong> diagnóstico KPSI, revisión de conceptos previos (célula vegetal, tejidos, reproducción).</li>
+        <li><strong>Sesión 2:</strong> exploración guiada del modelo 3D / AR, registro de observaciones y completación de esquema.</li>
+        <li><strong>Sesión 3:</strong> aplicación de quiz y ticket de salida, discusión sobre diversidad floral y polinización.</li>
+      </ol>
+
+      <h2>📏 Rúbrica breve para producto final</h2>
+      <ul class="spec-list">
+        <li><strong>Identificación de partes (0–3):</strong> reconoce correctamente los principales órganos florales.</li>
+        <li><strong>Relación estructura-función (0–3):</strong> explica cómo cada parte contribuye a la reproducción.</li>
+        <li><strong>Uso del lenguaje científico (0–2):</strong> emplea vocabulario adecuado y escribe con claridad.</li>
+        <li><strong>Reflexión y cuidado del entorno (0–2):</strong> vincula la flor con la importancia de proteger polinizadores y hábitats.</li>
+      </ul>
+    </section>
+  </main>
+  
+<footer class="site-footer">
+  <p>
+    Neotech EduLab SpA · XR para la educación científica · Proyecto: <strong>"Ver la flor por dentro"</strong>.<br>
+    Desarrollado junto a estudiantes y PIE para explorar la anatomía floral en 3D, AR y VR.
+  </p>
+  <p>
+    Contacto: <a href="mailto:neotechedulab@gmail.com">neotechedulab@gmail.com</a> ·
+    Instagram: @neotech_edulab
+  </p>
+</footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function() {
+      const form = document.getElementById('docenteForm');
+      const panel = document.getElementById('docentePanel');
+      const msg = document.getElementById('docenteMsg');
+      if (!form) return;
+      form.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+        const clave = (this.clave.value || '').trim();
+        if (clave === 'neotech') {
+          panel.classList.remove('hidden');
+          msg.textContent = 'Acceso concedido. Recuerda cambiar la clave si publicas este recurso.';
+        } else {
+          msg.textContent = 'Contraseña incorrecta (usa "neotech" sólo en esta demo).';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

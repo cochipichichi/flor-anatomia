@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de datos · Flor XR Lab</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#020617" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  
+<header class="top-bar">
+  <div class="brand">
+    <span class="brand-mark">🌸</span>
+    <div class="brand-text">
+      <div>XR Lab · Anatomía de la flor</div>
+      <small>Neotech EduLab · Inclusión & Ciencia</small>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <a href="index.html" class="nav-btn accent"><span>🏠</span><span>Inicio</span></a>
+    <a href="viewer3D/flor-3d.html" class="nav-btn"><span>👁️</span><span>Ver en 3D</span></a>
+    <a href="viewerAR/flor-ar.html" class="nav-btn"><span>📱</span><span>AR</span></a>
+    <a href="viewerVR/flor-vr.html" class="nav-btn"><span>🥽</span><span>VR</span></a>
+    <a href="dashboard.html" class="nav-btn"><span>📊</span><span>Dashboard</span></a>
+    <a href="docente.html" class="nav-btn"><span>🧑‍🏫</span><span>Docente</span></a>
+  </nav>
+  <div class="accessibility-controls" aria-label="Controles de accesibilidad">
+    <button class="ctrl-btn" type="button" data-action="home" title="Ir al inicio">🏠</button>
+    <button class="ctrl-btn" type="button" data-action="speak" title="Leer el contenido">🗣️</button>
+    <button class="ctrl-btn" type="button" data-action="toggle-theme" title="Cambiar tema claro/oscuro">🌓</button>
+    <button class="ctrl-btn" type="button" data-action="font-inc" title="Aumentar tamaño de letra">A+</button>
+    <button class="ctrl-btn" type="button" data-action="font-dec" title="Disminuir tamaño de letra">A−</button>
+  </div>
+</header>
+
+  <main id="main-content" class="layout">
+    <section class="card">
+      <h1>📊 Dashboard de datos · Partes de la flor</h1>
+      <p>
+        Este panel muestra cuántas estructuras tiene una flor modelo (sépalos, pétalos, estambres y carpelos).
+        Los datos provienen del archivo <code>anatomia_flor_partes.csv</code>. Puedes editar el CSV o usar esta
+        página como ejemplo para que el estudiantado construya sus propios gráficos.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>🌼 Gráfico 1: número de estructuras</h2>
+      <p>Compara la cantidad de piezas de cada tipo en la flor modelo.</p>
+      <div class="chart-wrapper">
+        <canvas id="chartPartes" aria-label="Gráfico de número de estructuras florales" role="img"></canvas>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>✏️ Datos en tabla (solo lectura)</h2>
+      <div class="table-scroll">
+        <table class="data-table" id="tablaDatos">
+          <thead>
+            <tr>
+              <th>Estructura</th>
+              <th>Categoría</th>
+              <th>Cantidad</th>
+              <th>Función</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Sugerencia: pide al curso que mida flores reales (por ejemplo, de azucena, rosa o lirio),
+        registre los datos en una copia del CSV y compare distintas especies.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>📂 Archivo de datos</h2>
+      <p>Puedes descargar la plantilla y adaptarla a otras actividades:</p>
+      <a href="assets/data/anatomia_flor_partes.csv" download class="cta-btn small">✅ Descargar CSV de ejemplo</a>
+    </section>
+  </main>
+  
+<footer class="site-footer">
+  <p>
+    Neotech EduLab SpA · XR para la educación científica · Proyecto: <strong>"Ver la flor por dentro"</strong>.<br>
+    Desarrollado junto a estudiantes y PIE para explorar la anatomía floral en 3D, AR y VR.
+  </p>
+  <p>
+    Contacto: <a href="mailto:neotechedulab@gmail.com">neotechedulab@gmail.com</a> ·
+    Instagram: @neotech_edulab
+  </p>
+</footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function() {
+      const CSV_URL = 'assets/data/anatomia_flor_partes.csv';
+
+      function parseCsv(text) {
+        const lines = text.trim().split(/\r?\n/);
+        if (!lines.length) return { headers: [], rows: [] };
+        const headers = lines[0].split(';').map(h => h.trim());
+        const rows = lines.slice(1).map(line => line.split(';').map(c => c.trim()));
+        return { headers, rows };
+      }
+
+      function renderTable(data) {
+        const tbody = document.querySelector('#tablaDatos tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        data.rows.forEach(cells => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${cells[0]}</td><td>${cells[1]}</td><td>${cells[2]}</td><td>${cells[3]}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function buildChart(data) {
+        const labels = data.rows.map(r => r[0]);
+        const cantidades = data.rows.map(r => Number(r[2] || 0));
+        const ctx = document.getElementById('chartPartes')?.getContext('2d');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{ label: 'Cantidad de estructuras', data: cantidades, borderWidth: 1 }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: { beginAtZero: true, title: { display: true, text: 'Número de piezas' } }
+            }
+          }
+        });
+      }
+
+      fetch(CSV_URL)
+        .then(r => r.text())
+        .then(text => { const data = parseCsv(text); renderTable(data); buildChart(data); })
+        .catch(err => console.error('Error al cargar CSV', err));
+    })();
+  </script>
+</body>
+</html>

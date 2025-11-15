@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparador · Flor completa vs incompleta</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#020617" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+</head>
+<body>
+  
+<header class="top-bar">
+  <div class="brand">
+    <span class="brand-mark">🌸</span>
+    <div class="brand-text">
+      <div>XR Lab · Anatomía de la flor</div>
+      <small>Neotech EduLab · Inclusión & Ciencia</small>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <a href="index.html" class="nav-btn accent"><span>🏠</span><span>Inicio</span></a>
+    <a href="viewer3D/flor-3d.html" class="nav-btn"><span>👁️</span><span>Ver en 3D</span></a>
+    <a href="viewerAR/flor-ar.html" class="nav-btn"><span>📱</span><span>AR</span></a>
+    <a href="viewerVR/flor-vr.html" class="nav-btn"><span>🥽</span><span>VR</span></a>
+    <a href="dashboard.html" class="nav-btn"><span>📊</span><span>Dashboard</span></a>
+    <a href="docente.html" class="nav-btn"><span>🧑‍🏫</span><span>Docente</span></a>
+  </nav>
+  <div class="accessibility-controls" aria-label="Controles de accesibilidad">
+    <button class="ctrl-btn" type="button" data-action="home" title="Ir al inicio">🏠</button>
+    <button class="ctrl-btn" type="button" data-action="speak" title="Leer el contenido">🗣️</button>
+    <button class="ctrl-btn" type="button" data-action="toggle-theme" title="Cambiar tema claro/oscuro">🌓</button>
+    <button class="ctrl-btn" type="button" data-action="font-inc" title="Aumentar tamaño de letra">A+</button>
+    <button class="ctrl-btn" type="button" data-action="font-dec" title="Disminuir tamaño de letra">A−</button>
+  </div>
+</header>
+
+  <main id="main-content" class="layout">
+    <section class="card">
+      <h1>⚖️ Flor completa vs flor incompleta / unisexual</h1>
+      <p>
+        Usa este comparador como apoyo para discutir diversidad floral, tipos de reproducción y cómo se organizan las
+        plantas en función de sus flores (monoicas, dioicas, hermafroditas, etc.).
+      </p>
+      <label for="enfoqueRange">Ajusta el enfoque:</label>
+      <input id="enfoqueRange" type="range" min="0" max="100" value="50" />
+      <p id="enfoqueLabel" class="note">Enfoque equilibrado entre flor completa e incompleta.</p>
+    </section>
+
+    <section class="card">
+      <div class="grid two-cols">
+        <article id="colCompleta" class="card">
+          <h2>🌼 Flor completa y perfecta</h2>
+          <ul class="spec-list">
+            <li>Posee cáliz, corola, androceo y gineceo.</li>
+            <li>Presenta estambres y pistilo en la misma flor (hermafrodita).</li>
+            <li>Suele favorecer la autopolinización y la polinización cruzada.</li>
+            <li>Ejemplos: muchas leguminosas, rosas, lirios.</li>
+          </ul>
+        </article>
+        <article id="colIncompleta" class="card">
+          <h2>🌺 Flor incompleta o unisexual</h2>
+          <ul class="spec-list">
+            <li>Carece de alguno de los verticilos (por ejemplo, no tiene pétalos o carece de sépalos).</li>
+            <li>Puede ser masculina (solo estambres) o femenina (solo pistilos).</li>
+            <li>Favorece estrategias como la polinización por viento o separación de sexos en la planta.</li>
+            <li>Ejemplos: flores masculinas y femeninas en maíz, sauces, muchas gramíneas.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+  
+<footer class="site-footer">
+  <p>
+    Neotech EduLab SpA · XR para la educación científica · Proyecto: <strong>"Ver la flor por dentro"</strong>.<br>
+    Desarrollado junto a estudiantes y PIE para explorar la anatomía floral en 3D, AR y VR.
+  </p>
+  <p>
+    Contacto: <a href="mailto:neotechedulab@gmail.com">neotechedulab@gmail.com</a> ·
+    Instagram: @neotech_edulab
+  </p>
+</footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function() {
+      const range = document.getElementById('enfoqueRange');
+      const label = document.getElementById('enfoqueLabel');
+      const colC = document.getElementById('colCompleta');
+      const colI = document.getElementById('colIncompleta');
+      if (!range) return;
+      function update() {
+        const v = parseInt(range.value || '50', 10);
+        if (v < 40) {
+          label.textContent = 'Más enfoque en flores incompletas / unisexuales.';
+          colI.style.borderColor = 'rgba(56, 189, 248, 0.9)';
+          colC.style.borderColor = 'rgba(148, 163, 184, 0.35)';
+        } else if (v > 60) {
+          label.textContent = 'Más enfoque en flores completas y perfectas.';
+          colC.style.borderColor = 'rgba(56, 189, 248, 0.9)';
+          colI.style.borderColor = 'rgba(148, 163, 184, 0.35)';
+        } else {
+          label.textContent = 'Enfoque equilibrado entre flor completa e incompleta.';
+          colC.style.borderColor = 'rgba(148, 163, 184, 0.35)';
+          colI.style.borderColor = 'rgba(148, 163, 184, 0.35)';
+        }
+      }
+      range.addEventListener('input', update);
+      update();
+    })();
+  </script>
+</body>
+</html>
