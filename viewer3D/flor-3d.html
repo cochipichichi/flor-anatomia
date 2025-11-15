@@ -45,6 +45,7 @@
         Usa el mouse o el tacto para rotar, acercar y alejar. Pide al estudiantado que identifique cada parte mientras
         tú vas activando la narración o mostrando etiquetas en la pantalla.
       </p>
+      
       <model-viewer src="../assets/models/anatomia_flor.glb"
                     alt="Modelo 3D de la anatomía de una flor"
                     camera-controls
@@ -54,7 +55,47 @@
                     ar
                     ar-modes="webxr scene-viewer quick-look"
                     style="width: 100%; height: 520px; border-radius: 1rem; background: radial-gradient(circle at top, #0f172a, #020617);">
+        <!-- Hotspots aproximados, ajustables según el modelo -->
+        <button slot="hotspot-sepalos"
+                data-part="Sépalos"
+                data-position="0.0 0.1 0.3"
+                data-normal="0 1 0"
+                class="hotspot"
+                aria-label="Sépalos">
+          🟢 Sépalos
+        </button>
+        <button slot="hotspot-petalos"
+                data-part="Pétalos"
+                data-position="0.0 0.25 0.1"
+                data-normal="0 1 0"
+                class="hotspot"
+                aria-label="Pétalos">
+          🌸 Pétalos
+        </button>
+        <button slot="hotspot-estambres"
+                data-part="Estambres"
+                data-position="0.0 0.28 -0.05"
+                data-normal="0 1 0"
+                class="hotspot"
+                aria-label="Estambres">
+          🟡 Estambres
+        </button>
+        <button slot="hotspot-pistilo"
+                data-part="Pistilo"
+                data-position="0.0 0.34 0.0"
+                data-normal="0 1 0"
+                class="hotspot"
+                aria-label="Pistilo">
+          🧬 Pistilo
+        </button>
       </model-viewer>
+      <div class="card" style="margin-top:0.8rem;">
+        <h2>📌 Panel de partes seleccionadas</h2>
+        <p id="hotspotInfo">
+          Toca un hotspot del modelo (sépalos, pétalos, estambres o pistilo) para ver aquí su función principal.
+        </p>
+      </div>
+
       <div class="cta-row">
         <a href="../viewerAR/flor-ar.html" class="cta-btn small"><span>📱</span><span>Abrir vista AR</span></a>
         <a href="../viewerVR/flor-vr.html" class="cta-btn small secondary"><span>🥽</span><span>Abrir vista VR</span></a>

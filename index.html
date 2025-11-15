@@ -46,6 +46,7 @@
           para estudiantes de Enseñanza Media, PIE y curiosos de la botánica.
         </p>
         <div class="cta-row">
+          <button type="button" class="cta-btn small secondary" data-action="easy-read">🧩 Modo lectura fácil</button>
           <a href="viewer3D/flor-3d.html" class="cta-btn"><span>👁️</span><span>Ver modelo 3D</span></a>
           <a href="viewerAR/flor-ar.html" class="cta-btn secondary"><span>📱</span><span>Modo AR</span></a>
           <a href="viewerVR/flor-vr.html" class="cta-btn secondary"><span>🥽</span><span>Modo VR</span></a>
@@ -62,9 +63,13 @@
 
     <section class="card" data-searchable>
       <h2>🌱 ¿Qué es una flor?</h2>
-      <p>
+      <p class="normal-only">
         La flor es el órgano reproductor característico de las plantas angiospermas. En una flor típica distinguimos
         cuatro verticilos o "anillos" dispuestos de afuera hacia adentro:
+      </p>
+      <p class="easy-read-only">
+        La flor es la parte de la planta donde se forman las semillas. Tiene capas como un “sándwich”: primero los sépalos,
+        luego los pétalos y al centro las partes que producen polen y óvulos.
       </p>
       <ul class="spec-list">
         <li><strong>Cáliz (sépalos):</strong> piezas generalmente verdes que protegen al botón floral.</li>
@@ -161,14 +166,33 @@
       </div>
     </section>
 
+    
     <section class="card" id="quiz" data-searchable>
-      <h2>🧪 Quiz rápido</h2>
-      <ol>
-        <li>Explica la diferencia entre una flor completa e incompleta.</li>
-        <li>¿Qué pasaría si una flor no tuviera pétalos visibles? ¿Cómo podría compensar esa ausencia?</li>
-        <li>Ordena de afuera hacia adentro: pétalos, cáliz, pistilo, estambres.</li>
-      </ol>
+      <h2>🧪 Quiz rápido (autocorregible)</h2>
+      <form id="quizForm">
+        <fieldset>
+          <legend>1. Una flor completa se caracteriza por...</legend>
+          <label><input type="radio" name="q1" value="a"> Tener solo estambres y pistilo.</label><br>
+          <label><input type="radio" name="q1" value="b" data-correct="true"> Tener cáliz, corola, estambres y pistilo.</label><br>
+          <label><input type="radio" name="q1" value="c"> No tener pétalos ni sépalos.</label>
+        </fieldset>
+        <fieldset>
+          <legend>2. ¿Qué función principal cumplen los pétalos?</legend>
+          <label><input type="radio" name="q2" value="a"> Sujetar la flor al tallo.</label><br>
+          <label><input type="radio" name="q2" value="b"> Producir óvulos.</label><br>
+          <label><input type="radio" name="q2" value="c" data-correct="true"> Atraer polinizadores con su color y forma.</label>
+        </fieldset>
+        <fieldset>
+          <legend>3. Marca la afirmación correcta:</legend>
+          <label><input type="radio" name="q3" value="a"> El pistilo es parte masculina de la flor.</label><br>
+          <label><input type="radio" name="q3" value="b" data-correct="true"> El pistilo contiene el ovario con los óvulos.</label><br>
+          <label><input type="radio" name="q3" value="c"> Los sépalos producen polen.</label>
+        </fieldset>
+        <button type="submit" class="cta-btn small">✅ Corregir</button>
+      </form>
+      <p id="quizResultado" class="note"></p>
     </section>
+
 
     <section class="card" id="ticket-salida" data-searchable>
       <h2>🎟️ Ticket de salida</h2>
@@ -191,8 +215,18 @@
 
     <section class="card">
       <h2>🧭 Otras vistas y herramientas</h2>
+    <section class="card">
+      <h2>📥 Material descargable</h2>
+      <p>Usa estas plantillas para trabajar sin conexión o imprimirlas:</p>
+      <div class="cta-row">
+        <a href="docs/guia_estudiante_flor.pdf" class="cta-btn small">📄 Guía de estudiante (PDF)</a>
+        <a href="docs/guia_docente_flor.pdf" class="cta-btn small secondary">📘 Guía docente (PDF)</a>
+      </div>
+    </section>
+
       <p>Accesos directos a las secciones complementarias del laboratorio XR:</p>
       <div class="cta-row">
+          <button type="button" class="cta-btn small secondary" data-action="easy-read">🧩 Modo lectura fácil</button>
         <a href="dashboard.html" class="cta-btn small">📊 Dashboard interactivo</a>
         <a href="comparador.html" class="cta-btn small">⚖️ Flor completa vs incompleta</a>
         <a href="docente.html" class="cta-btn small">🧑‍🏫 Vista docente</a>
@@ -226,5 +260,36 @@
       navigator.serviceWorker.register('service-worker.js').catch(console.error);
     }
   </script>
+
+  <script>
+    (function() {
+      const form = document.getElementById('quizForm');
+      const salida = document.getElementById('quizResultado');
+      if (!form) return;
+      form.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+        let total = 0, correctas = 0;
+        const preguntas = ['q1', 'q2', 'q3'];
+        preguntas.forEach(name => {
+          total++;
+          const marcadas = Array.from(form.querySelectorAll('input[name="' + name + '"]:checked'));
+          if (marcadas.length && marcadas[0].hasAttribute('data-correct')) {
+            correctas++;
+          }
+        });
+        const pct = Math.round((correctas / total) * 100);
+        let mensaje = `Puntaje: ${correctas}/${total} (${pct}%). `;
+        if (pct === 100) {
+          mensaje += '¡Excelente! Puedes explicar muy bien la anatomía básica de la flor.';
+        } else if (pct >= 60) {
+          mensaje += 'Vas bien. Revisa las partes donde te equivocaste y vuelve a mirar el modelo 3D.';
+        } else {
+          mensaje += 'Conviene repasar el esquema de la flor y usar el modelo 3D/AR para reforzar.';
+        }
+        salida.textContent = mensaje;
+      });
+    })();
+  </script>
 </body>
 </html>
+

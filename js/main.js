@@ -87,4 +87,45 @@
       });
     }
   });
+
+  const btnEasy = document.querySelector('[data-action="easy-read"]');
+  function setEasyRead(on) {
+    const val = on ? 'on' : 'off';
+    document.documentElement.setAttribute('data-easy-read', val);
+    localStorage.setItem('easyRead', val);
+  }
+  if (btnEasy) {
+    const storedER = localStorage.getItem('easyRead');
+    if (storedER === 'on') setEasyRead(true);
+    btnEasy.addEventListener('click', function() {
+      const current = document.documentElement.getAttribute('data-easy-read') === 'on';
+      setEasyRead(!current);
+    });
+  }
+
+  // Hotspot info panel (viewer3D)
+  const hotspotPanel = document.getElementById('hotspotInfo');
+  if (hotspotPanel) {
+    const mensajes = {
+      "Sépalos": "Sépalos: piezas verdes que protegen al botón floral antes de abrirse.",
+      "Pétalos": "Pétalos: estructuras de colores que atraen polinizadores con su forma y olor.",
+      "Estambres": "Estambres: parte masculina de la flor; producen y liberan el polen.",
+      "Pistilo": "Pistilo o carpelo: parte femenina; contiene el ovario con los óvulos."
+    };
+    document.querySelectorAll('.hotspot[data-part]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const part = btn.getAttribute('data-part');
+        hotspotPanel.textContent = mensajes[part] || part;
+      });
+    });
+  }
+
+  // Aplicar preferencia de lectura fácil al cargar
+  (function() {
+    const storedER = localStorage.getItem('easyRead');
+    if (storedER === 'on') {
+      document.documentElement.setAttribute('data-easy-read', 'on');
+    }
+  })();
+
 })();
